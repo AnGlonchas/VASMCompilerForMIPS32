@@ -3,16 +3,13 @@ from tobin import Instruction
 from os import mkdir, path
 from core import *  
 
-def parse(program: str) -> str:
+def parse(program: str, output: str = "./a.vbin") -> str:
 
     code = open_file(program).replace(",", "")
     tokens = tokenize(code)
     result = ""
 
-    if not path.exists(BIN_PATH): # Create the bin folder if it doesnt exist
-        mkdir(BIN_PATH)
-
-    with open(BIN_PATH+"a.vbin", "w+") as file:
+    with open(output, "w+") as file:
         for i, line in enumerate(tokens): # Get the line number with i
 
             """

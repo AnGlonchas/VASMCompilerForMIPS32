@@ -71,7 +71,7 @@ class Instruction:
         return f"{self.bin_opcode}_{tobin(self.arg1[1:], 26)}\n"
 
     def iMath(self) -> str:
-        if self.arg1[0] != "&" or self.arg2[0] != "&":
+        if self.arg1[0] != "$" or self.arg2[0] != "$":
             raise VASMCompilationError(
                 name="EXPECTED_REG_ERR",
                 line=self.line,
@@ -88,7 +88,7 @@ class Instruction:
             raise VASMCompilationError(
                 name="INVALID_REG_ERR",
                 line=self.line,
-                expected="Expected 3 arguments (&, &, #)."
+                expected="Expected 3 arguments ($, $, #)."
             )
         return f"{self.bin_opcode}_{tobin(self.arg2[1:], 5)}_{tobin(self.arg1[1:], 5)}_{tobin(self.arg3[1:], 16)}\n"
 
@@ -97,7 +97,7 @@ class Instruction:
     def Math(self) -> str:
         self.special = self.instructions[self.opcode][SPECIAL]
 
-        if self.arg1[0] != "&" or self.arg2[0] != "&" or self.arg3[0] != "&":
+        if self.arg1[0] != "$" or self.arg2[0] != "$" or self.arg3[0] != "$":
             raise VASMCompilationError(
                 name="EXPECTED_REG_ERR",
                 line=line,
@@ -108,7 +108,7 @@ class Instruction:
             raise VASMCompilationError(
                 name="INVALID_REG_ERR",
                 line=line,
-                expected="Expected 3 arguments (&, &, &)."
+                expected="Expected 3 arguments ($, $, $)."
             )
 
         return f"{self.bin_opcode}_{tobin(self.arg3[1:], 5)}_{tobin(self.arg1[1:], 5)}_{tobin(self.arg2[1:], 5)}_{empty(5)}_{self.special}\n"
