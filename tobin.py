@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from compiler_error import VASMCompilationError
 """
 
